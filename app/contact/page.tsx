@@ -25,7 +25,7 @@ const socials = [
 	},
 	{
 		icon: <Linkedin size={20} />,
-		href: "https://www.linkedin.com/in/marvel-ken-anele-437171225/",
+		href: "https://www.linkedin.com/in/marvel-chizaram-ken-437171225",
 		label: "Linkedin",
 		handle: "marvel-ken",
 	},
