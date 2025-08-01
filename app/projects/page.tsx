@@ -6,10 +6,7 @@ import { allProjects } from "contentlayer/generated";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 import { Article } from "./article";
-import { Redis } from "@upstash/redis";
 import { Eye, Sun, Moon } from "lucide-react";
-
-const redis = Redis.fromEnv();
 
 export default function ProjectsPage() {
   const [isDark, setIsDark] = useState(true);
@@ -33,16 +30,19 @@ export default function ProjectsPage() {
   useEffect(() => {
     const loadViews = async () => {
       try {
-        const viewCounts = await redis.mget<number[]>(
-          ...allProjects.map((p) => ["pageviews", "projects", p.slug].join(":"))
-        );
-        
-        const viewsData = viewCounts.reduce((acc, v, i) => {
-          acc[allProjects[i].slug] = v ?? 0;
-          return acc;
-        }, {} as Record<string, number>);
-        
-        setViews(viewsData);
+        const response = await fetch('/api/views');
+        if (response.ok) {
+          const viewsData = await response.json();
+          setViews(viewsData);
+        } else {
+          console.error("Failed to load views:", response.statusText);
+          // Fallback to zero views
+          const fallbackViews = allProjects.reduce((acc, project) => {
+            acc[project.slug] = 0;
+            return acc;
+          }, {} as Record<string, number>);
+          setViews(fallbackViews);
+        }
       } catch (error) {
         console.error("Failed to load views:", error);
         // Fallback to zero views
