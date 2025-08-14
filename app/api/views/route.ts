@@ -21,7 +21,7 @@ export const GET = async (req: NextRequest): Promise<NextResponse> => {
       acc[project.slug] = viewCounts[index] ?? 0;
       return acc;
     }, {} as Record<string, number>);
-
+  
     return new NextResponse(JSON.stringify(viewsData), {
       status: 200,
       headers: { "Content-Type": "application/json" },

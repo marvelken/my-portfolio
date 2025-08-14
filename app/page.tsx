@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Particles from "./components/particles";
-import { Download } from 'lucide-react';
+import { Download, FileText } from 'lucide-react';
 
 const navigation = [
   { name: "Projects", href: "/projects" },
@@ -38,7 +38,7 @@ export default function Home() {
         <h2 className="text-sm text-black dark:text-zinc-500">
           Right now I'm deep into building docs. Honestly? I'm obsessed.
         </h2>
-        <div className="mt-[50px]">
+        <div className="mt-[50px] flex gap-4 justify-center">
           <a
             href="/Ken-Anele, Chizaram Marvel - Resume (2).pdf"
             download
@@ -46,6 +46,15 @@ export default function Home() {
           >
             <Download className="w-4 h-4 mr-2" />
             Download Resume
+          </a>
+          <a
+            href="/Technical Writing Certificate.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 justify-center rounded-md text-sm font-medium px-4 py-2 transition-colors bg-transparent text-black hover:text-zinc-800 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:text-zinc-100 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-500"
+          >
+            <FileText className="w-4 h-4 mr-2" />
+            View Technical Writing Certificate
           </a>
         </div>
       </div>
